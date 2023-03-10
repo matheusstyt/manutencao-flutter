@@ -36,22 +36,22 @@ class Ordem {
     required this.colorFlutter,
     required this.backFlutter
   });
-  late final int id;
+  late final int? id;
   late final String descricao;
-  late final String dataCriacao;
-  late final double tempoTotalManutencao;
-  late final int frequenciaManutencao;
+  late final String? dataCriacao;
+  late final double? tempoTotalManutencao;
+  late final int? frequenciaManutencao;
   late final String responsavelCriacao;
   late final String? area;
-  late final int tipo;
-  late final int status;
+  late final int? tipo;
+  late final int? status;
   late final double? mttr;
   late final double? mtbf;
-  late final int statusConjunto;
-  late final String dataInicio;
-  late final String dataFim;
-  late final String color;
-  late final String statusFlutter;
+  late final int? statusConjunto;
+  late final String? dataInicio;
+  late final String? dataFim;
+  late final String? color;
+  late final String? statusFlutter;
   late final String colorFlutter;
   late final String backFlutter;
 

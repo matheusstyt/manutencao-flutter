@@ -3,9 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../ordem_model.dart';
+import 'atividade_sreen.dart';
 
 class OrdemManutencaoPage extends StatefulWidget {
   @override
+
   _OrdemManutencaoPageState createState() => _OrdemManutencaoPageState();
 }
 
@@ -72,9 +74,9 @@ class _OrdemManutencaoPageState extends State<OrdemManutencaoPage> {
                   String desc = ordens!.ordem[index].descricao.substring(1);
                   desc = letra + desc;
                   if (orientation == Orientation.landscape) {
-                    return listaHorizontal(ordens, index, cor, background, desc, textColor);
+                    return listaHorizontal(context, ordens, index, cor, background, desc, textColor);
                   } else {
-                    return listaVertical(ordens, index, cor, background, desc, textColor);
+                    return listaVertical(context, ordens!.ordem[index], index, cor, background, desc, textColor);
                   }
                 }),
           ),
@@ -83,7 +85,7 @@ class _OrdemManutencaoPageState extends State<OrdemManutencaoPage> {
     );
   }
 }
-listaHorizontal (ordens, index, cor, background, desc, textColor){
+listaHorizontal (context, ordens, index, cor, background, desc, textColor){
   return Padding(
     padding: const EdgeInsets.all(5.0),
     child: Container(
@@ -134,14 +136,20 @@ listaHorizontal (ordens, index, cor, background, desc, textColor){
     ),
   );
 }
-listaVertical (ordens, index, cor, background, desc, textColor){
+listaVertical (context, ordem, index, cor, background, desc, textColor){
 
 
   return Padding(
     padding: const EdgeInsets.all(5.0),
     child: InkWell(
       onTap: (){
-        print(ordens!.ordem[index].descricao);
+        print(ordem.descricao);
+        print(ordem.id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AtividadeManutencaoPage( descricao: ordem.descricao as String, id: ordem.id as int),
+          ),
+        );
 
       },
       child: Container(
@@ -169,7 +177,7 @@ listaVertical (ordens, index, cor, background, desc, textColor){
                       maxLines: 1,
 
                     ),
-                    Text(ordens!.ordem[index].statusFlutter, style: TextStyle( color: textColor),),
+                    Text(ordem!.statusFlutter, style: TextStyle( color: textColor),),
                     Icon(Icons.circle, color: cor,),
                   ],
                 ),
@@ -190,7 +198,7 @@ listaVertical (ordens, index, cor, background, desc, textColor){
                       ),
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                          child: Text('Responsável: '+ordens!.ordem[index].responsavelCriacao, style: TextStyle( color: textColor),),
+                          child: Text('Responsável: '+ordem!.responsavelCriacao, style: TextStyle( color: textColor),),
                         )),
                   ),
                 ],
